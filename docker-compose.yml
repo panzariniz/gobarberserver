@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    container_name: 'bootcamp8_web'
+    volumes:
+      - .:/home/node/api
+      - /home/node/api/node_modules
+    ports:
+      - 3333:3333
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    container_name: 'bootcamp8_redis'
+    ports:
+      - '6379:6379'
+    env_file:
+      - .env
+    volumes:
+      - bootcamp8_redis_data:/data
+  # mongodb:
+  #   image: mongo:latest
+  #   container_name: 'bootcamp8_mongodb'
+  #   environment:
+  #     - MONGO_INITDB_DATABASE=gobarber
+  #   ports:
+  #     - 27017:27017
+  #   networks:
+  #     - mongodb-compose-network
+  # postgres:
+  #   image: postgres:latest
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - POSTGRES_PASSWORD=${DB_PASS}
+
+volumes:
+  bootcamp8_redis_data:
+# networks:
+# mongodb-compose-network:
+#   driver: bridge
