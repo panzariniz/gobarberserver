@@ -1,3 +1,4 @@
+// import Redis from 'redis';
 import Redis from 'ioredis';
 
 class Cache {
@@ -5,9 +6,17 @@ class Cache {
     this.oneMinuteInSeconds = 60;
     this.oneHourInSeconds = 3600;
 
+    // this.redis = Redis.createClient({
+    //   host: process.env.REDIS_HOST,
+    //   port: process.env.REDIS_PORT,
+    //   connectTimeout: 10000,
+    //   prefix: 'cache:',
+    // });
+
     this.redis = new Redis({
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
+      connectTimeout: 10000,
       keyPrefix: 'cache:',
     });
   }

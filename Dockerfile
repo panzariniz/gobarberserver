@@ -6,11 +6,11 @@ WORKDIR /home/node/api
 
 COPY package.json yarn.* ./
 
+USER node
+
 RUN yarn
 
 COPY --chown=node:node . .
-
-USER node
 
 EXPOSE 3333
 
