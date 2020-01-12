@@ -17,6 +17,15 @@ services:
     networks:
       - app-connect
 
+  jobs:
+    container_name: jobs
+    build: .
+    command: yarn queue
+    depends_on:
+      - web
+    networks:
+      - app-connect
+
   redis:
     image: bitnami/redis:latest
     container_name: bootcamp8_redis
